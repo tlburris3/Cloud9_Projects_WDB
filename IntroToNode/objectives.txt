@@ -1,0 +1,13 @@
+#Using Node
+
+  * Interact with Node Console.
+        --> REPL: Read, Evaluate, Print, Loop
+        - this ^ is based off of using the command line
+          writing server side JavaScript by just typing
+          "node" on the CM.
+        - You can type "irb" (Stands for: "Interactive Ruby")
+          on your console and then you can type server side
+          code for ruby.
+  * Run a file with Node.
+        - Type on the command line:
+          "> node <filename>"
