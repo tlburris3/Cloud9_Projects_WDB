@@ -1,0 +1,9 @@
+<h1>You Fell in Love with: <%= dogType %>!</h1>
+
+<% if (dogType.toLowerCase() === "doberman") { %>
+    <img src="https://thedailyshep.com/wp-content/uploads/2017/12/doberman-2978274_1280.jpg">
+<% } else if (dogType.toLowerCase() === "shepherd") { %>
+    <img src="https://i.ytimg.com/vi/JXP2mVz18JQ/maxresdefault.jpg">
+<% } else { %>
+    <p>Sorry, but <%= dogType %> doesn't exist... You need a dog in your life!</p>
+<% } %>
