@@ -1,3 +1,5 @@
+<% include partials/header.ejs %>
+
 <h1>You Fell in Love with: <%= dogType %>!</h1>
 
 <% if (dogType.toLowerCase() === "doberman") { %>
@@ -7,3 +9,5 @@
 <% } else { %>
     <p>Sorry, but <%= dogType %> doesn't exist... You need a dog in your life!</p>
 <% } %>
+
+<% include partials/footer.ejs %>

@@ -1,6 +1,10 @@
 var express = require("express");
 var app = express();
 
+app.use(express.static("public")); // Now including the "public" directory's files.
+app.set("view engine", "ejs");  // Assumes every file rendered will be a .ejs file,
+                                // Unless otherwise noted.
+
 /** ROUTES **/
 app.get("/", function(req, res) {
     var type = req.params.type;
