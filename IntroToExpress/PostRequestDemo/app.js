@@ -7,7 +7,7 @@ app.set("view engine", "ejs");
 
 var friends = ["Tony", "Alyssa", "Fernando", "Frank", "Naila", "John", "Jorge"];
 
-/** ROUTES **/
+/** ROUTES - Gets **/
 app.get("/", function(req, res) {
    res.render("home"); 
 });
@@ -16,12 +16,14 @@ app.get("/friends", function(req, res) {
    res.render("friends", {friends: friends}); 
 });
 
+/** ROUTES - Posts **/
 app.post("/addfriend", function(req, res) {
     var newFriend = req.body.newfriend;
     friends.push(newFriend);
     res.redirect("/friends");
 });
 
+/** Starting the Server **/
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("Server started...");
 });
