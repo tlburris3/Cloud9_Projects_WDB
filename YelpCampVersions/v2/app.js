@@ -15,28 +15,6 @@ var campgroundSchema = new mongoose.Schema({
 
 var Campground = mongoose.model("Campground", campgroundSchema);
 
-Campground.create(
-   {
-      name: "Salmon Creek",
-      image: "https://cdn.pixabay.com/photo/2015/07/10/17/24/night-839807_960_720.jpg"
-   },
-   function (err, cg) {
-      if (err)
-         console.log("ERROR: " + err);
-      else
-         console.log("NEWLY CREATED CAMPGROUND: " + cg);
-   }
-)
-
-var campgrounds = [
-   {name: "Salmon Creek", image: "https://cdn.pixabay.com/photo/2015/07/10/17/24/night-839807_960_720.jpg"},
-   {name: "Granite Hill", image: "https://cdn.pixabay.com/photo/2018/04/27/19/52/snow-3355699_960_720.jpg"},
-   {name: "Billy Goat Escavade", image: "https://cdn.pixabay.com/photo/2018/05/02/18/36/tent-3369328_960_720.jpg"},
-   {name: "Salmon Creek", image: "https://cdn.pixabay.com/photo/2015/07/10/17/24/night-839807_960_720.jpg"},
-   {name: "Granite Hill", image: "https://cdn.pixabay.com/photo/2018/04/27/19/52/snow-3355699_960_720.jpg"},
-   {name: "Billy Goat Escavade", image: "https://cdn.pixabay.com/photo/2018/05/02/18/36/tent-3369328_960_720.jpg"}
-]; 
-
 /** ROUTES **/
 // Root Route - Landing Page
 app.get("/", function(req, res) {
@@ -44,18 +22,34 @@ app.get("/", function(req, res) {
 });
 
 app.get("/campgrounds", function(req, res) {
+   // Get all campgrounds from DB, then render file.
+   Campground.find({}, function(err, allCampgrounds) {
+      if (err)
+         console.log("ERROR: " + err);
+      else
+         res.render('campgrounds', {campgrounds: allCampgrounds});
+   });
+   
    // Show the campgrounds
-   res.render('campgrounds', {campgrounds: campgrounds});
+   // res.render('campgrounds', {campgrounds: campgrounds});
 });
 
 app.post("/campgrounds", function(req, res) { /** RESTful Routing - just the basics so far **/
-   // get data from form and add to campgrounds array
+   // get data from form
    var campName = req.body.name;
    var campImage = req.body.image;
    var newCampGround = {name: campName, image: campImage};
-   campgrounds.push(newCampGround);
-   // redirect back to campgrounds page - automatically redirected to the app.get() route!
-   res.redirect("/campgrounds");
+   // Add a campground to the campgrounds array
+   // campgrounds.push(newCampGround);
+   
+   // Create a new campground and save to the database
+   Campground.create(newCampGround, function (err, cg) {
+      if (err)
+         console.log("ERROR: " + err);
+      else
+         // redirect back to campgrounds page - automatically redirected to the app.get() route!
+         res.redirect("/campgrounds");
+   });
 });
 
 app.get("/campgrounds/new", function(req, res) {
