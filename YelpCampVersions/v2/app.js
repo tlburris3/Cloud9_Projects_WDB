@@ -1,9 +1,32 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
+mongoose.connect('mongodb://localhost/yelp_camp');
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+
+// Schema setup
+var campgroundSchema = new mongoose.Schema({
+   name: String,
+   image: String
+});
+
+var Campground = mongoose.model("Campground", campgroundSchema);
+
+Campground.create(
+   {
+      name: "Salmon Creek",
+      image: "https://cdn.pixabay.com/photo/2015/07/10/17/24/night-839807_960_720.jpg"
+   },
+   function (err, cg) {
+      if (err)
+         console.log("ERROR: " + err);
+      else
+         console.log("NEWLY CREATED CAMPGROUND: " + cg);
+   }
+)
 
 var campgrounds = [
    {name: "Salmon Creek", image: "https://cdn.pixabay.com/photo/2015/07/10/17/24/night-839807_960_720.jpg"},
@@ -42,5 +65,5 @@ app.get("/campgrounds/new", function(req, res) {
 
 /** Starting the Server **/
 app.listen(process.env.PORT, process.env.ID, function() {
-    console.log("Server for YelpCamp_Versions v1 started...");
+    console.log("Server for YelpCamp_Versions v2 started...");
 });
