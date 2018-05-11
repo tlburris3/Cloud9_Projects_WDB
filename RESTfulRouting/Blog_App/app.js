@@ -1,11 +1,13 @@
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var express = require("express");
-var app = express();
+var bodyParser = require("body-parser"),
+methodOverride = require("method-override"),
+mongoose = require("mongoose"),
+express = require("express"),
+app = express();
 
 // App Config.
 mongoose.connect("mongodb://localhost/restful_blog_app");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
@@ -68,6 +70,41 @@ app.get("/blogs/:id", function(req, res) {
             // Render the show page!
             res.render("show", {blog: foundBlog});
     });
+});
+
+// EDIT route - Show edit form for one blog
+app.get("/blogs/:id/edit", function(req, res) {
+    Blog.findById(req.params.id, function(err, foundBlog) {
+        if (err)
+            res.redirect("/blogs");
+        else
+            res.render("edit", {blog: foundBlog})
+    });
+});
+
+// UPDATE route - Update a particular blog, then redirect to somewhere.
+app.put("/blogs/:id", function(req, res) {
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog) {
+        if (err)
+            res.redirect("/blogs");
+        else
+            res.redirect("/blogs/" + req.params.id);
+        
+    });
+});
+
+// DELETE route - Delete a particular blog, then redirect to somewhere.
+app.delete("/blogs/:id", function(req, res) {
+   // destroy blog
+   Blog.findByIdAndRemove(req.params.id, function(err) {
+       if (err) {
+           res.redirect("/blogs");
+       }
+       else {
+           res.redirect("/blogs");
+       }
+   });
+   // redirect somewhere
 });
 
 /** Starting the server **/

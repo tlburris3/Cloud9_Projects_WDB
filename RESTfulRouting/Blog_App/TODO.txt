@@ -20,3 +20,14 @@
 * Add SHOW template
 * Add links to SHOW page
 * Style SHOW template
+
+# EDIT and UPDATE routes
+* Add edit route
+* Add edit form
+* Add update route
+* Add update form
+* Add method-override package for PUT req.
+
+# DELETE/DESTROY route
+* Add destroy route
+* Add edit and destroy links
