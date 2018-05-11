@@ -1,0 +1,22 @@
+# Blog Index
+* Setup the Blog App
+* Create the blog model
+* Add INDEX route and template
+* Add simple nav bar
+
+# Basic Layout
+* Add header and footer partials
+* Include Semantic UI
+* Add simple nav
+
+# Putting the C in CRUD
+* Add NEW route
+* Add NEW template
+* Add CREATE route
+* Add CREATE template
+
+# SHOW route
+* Add SHOW route
+* Add SHOW template
+* Add links to SHOW page
+* Style SHOW template
