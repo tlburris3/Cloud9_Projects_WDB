@@ -31,3 +31,7 @@
 # DELETE/DESTROY route
 * Add destroy route
 * Add edit and destroy links
+
+# Final Updates
+* Sanitize blog body
+* Style index
