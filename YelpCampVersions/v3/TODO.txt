@@ -1,0 +1,10 @@
+# v3
+
+# Add the Comment Model
+* Make our errors go away!
+* Display comments on campground show page
+
+# Comment New/Create
+* Nested Routes Understanding
+* Add the comment new and create routes
+* Add new comment form
